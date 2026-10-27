@@ -4,8 +4,8 @@
 # After each release, run scripts/update_homebrew_cask.sh <version> to refresh version and sha256,
 # then copy this file to Casks/revfly.rb in the tap repo (see DEPLOYMENT.md).
 cask "revfly" do
-  version "1.0.6"
-  sha256 "ffae1f437df7361629384177bb3f489f578d728d4bf5ff5d39b61f823a6608ec"
+  version "1.0.7"
+  sha256 "9145c148946966cb08da222f734823c1dc041a813d23d018ac9977d8d0a92958"
 
   url "https://github.com/eotsevych/RevFly/releases/download/v#{version}/RevFly_Universal.dmg"
   name "RevFly"
@@ -22,12 +22,6 @@ cask "revfly" do
   depends_on :macos
 
   app "RevFly.app"
-
-  # RevFly is not notarized (no paid Apple Developer ID), so drop the quarantine flag
-  # Homebrew adds; otherwise Gatekeeper blocks the first launch.
-  postflight_steps do
-    run "/usr/bin/xattr", args: ["-dr", "com.apple.quarantine", "{{appdir}}/RevFly.app"]
-  end
 
   uninstall quit: "com.revfly.desktop"
 
